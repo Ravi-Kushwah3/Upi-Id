@@ -34,7 +34,7 @@
                 <p>1.Copy UPI Information.</p>
         <div class="col-sm-12 border mb-2 border-2 border-primary rounded-1 w-auto p-2">
         <input type="text" value="exportsshreshth@okaxis" id="myInput">
-        <button onclick="myFunction()"> Copy </button>
+        <button onclick="myFunction()" id="myButton"> Copy </button>
         </div>
             </div>
         </div>
@@ -75,20 +75,21 @@
     
 
 <script>
-function myFunction() {
-  // Get the text field
-  var copyText = document.getElementById("myInput");
-
-  // Select the text field
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
-
-  // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
-  
-  // Alert the copied text
-  alert("Upi Id Copied : " + copyText.value);
+document.getElementById("myButton").addEventListener("click",async()=>{
+    try{
+        document.getElementById("myInput").select();
+        await navigator.clipboard.writeText(document.getElementById("myInput").value);
+        document.getElementById("myButton").innerText="Copied";
+        setTimeout(()=>{
+            getSelection().removeAllRanges();
+            document.getElementById("myButton").innerText="Copy Text";
+        },1500)
+    }
+catch(error){
+alert(error);
 }
+}
+)
 </script>
 
 
